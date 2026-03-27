@@ -49,8 +49,30 @@ class DownloaderManager {
         } catch (error) {
             const details = error?.stdout || error?.stderr || error?.message || 'Erro desconhecido';
             console.error('Erro ao fazer download:', details);
-            throw new Error('Falha ao processar o video no servidor. Verifique os logs do Render para ver o detalhe do yt-dlp.');
+            throw new Error(this.getFriendlyErrorMessage(details));
         }
+    }
+
+    getFriendlyErrorMessage(details) {
+        const normalizedDetails = String(details).toLowerCase();
+
+        if (normalizedDetails.includes('instagram') && normalizedDetails.includes('login required')) {
+            return 'O Instagram bloqueou este video para acesso sem login. Tente outro link publico ou configure cookies de uma conta.';
+        }
+
+        if (normalizedDetails.includes('instagram') && normalizedDetails.includes('rate-limit reached')) {
+            return 'O Instagram limitou temporariamente as requisicoes deste servidor. Tente novamente mais tarde.';
+        }
+
+        if (normalizedDetails.includes('ffmpeg') && normalizedDetails.includes('not found')) {
+            return 'O servidor nao encontrou o FFmpeg durante o processamento do audio.';
+        }
+
+        if (normalizedDetails.includes('yt-dlp') && normalizedDetails.includes('not found')) {
+            return 'O servidor nao encontrou o yt-dlp durante o processamento do video.';
+        }
+
+        return 'Falha ao processar o video no servidor. Verifique os logs do Render para ver o detalhe do yt-dlp.';
     }
 
     async cleanupOldFiles(maxAgeMinutes = 60) {
