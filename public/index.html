@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROXY - Download Áudio em MP3</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="bg-animated"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-container">
+                        <img src="/images/logo.png" alt="PROXY Logo" class="logo-image">
+                        <h1>PROXY</h1>
+                    </div>
+                    <p class="subtitle">Extraia áudio de vídeos em MP3</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h2>Baixe áudio de seus vídeos favoritos</h2>
+                <p>Suportamos YouTube, Instagram e Facebook</p>
+            </section>
+
+            <section class="input-section">
+                <div class="input-container">
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        placeholder="Cole aqui o link do vídeo (YouTube, Instagram ou Facebook)..."
+                        class="url-input"
+                    >
+                    <button id="downloadBtn" class="btn-download">
+                        <span class="btn-text">Baixar Áudio</span>
+                        <span class="btn-icon">⬇️</span>
+                    </button>
+                </div>
+                <div id="urlError" class="error-message"></div>
+            </section>
+
+            <section class="platforms">
+                <h3>Plataformas Suportadas</h3>
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <div class="platform-icon">📺</div>
+                        <h4>YouTube</h4>
+                        <p>Videos, playlists e shorts</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon">📷</div>
+                        <h4>Instagram</h4>
+                        <p>Reels, posts e stories</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon">👥</div>
+                        <h4>Facebook</h4>
+                        <p>Videos de grupos e páginas</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="status-section" id="statusSection" style="display: none;">
+                <div class="status-card">
+                    <div class="spinner"></div>
+                    <div id="statusMessage" class="status-message">Processando...</div>
+                    <div id="progressBar" class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div id="progressText" class="progress-text">0%</div>
+                </div>
+            </section>
+
+            <section class="success-section" id="successSection" style="display: none;">
+                <div class="success-card">
+                    <div class="success-icon">✅</div>
+                    <h3>Download Concluído!</h3>
+                    <p id="fileName"></p>
+                    <a id="downloadLink" class="btn-download" href="#" download>
+                        Baixar Arquivo
+                    </a>
+                    <button id="resetBtn" class="btn-secondary">Fazer Outro Download</button>
+                </div>
+            </section>
+
+            <section class="features">
+                <h3>Recursos PROXY</h3>
+                <ul class="features-list">
+                    <li>✨ Converte automaticamente para MP3</li>
+                    <li>🚀 Download rápido e seguro</li>
+                    <li>🔒 Seus dados não são armazenados</li>
+                    <li>📱 Funciona em qualquer dispositivo</li>
+                    <li>🤖 Mantém a melhor qualidade de áudio</li>
+                    <li>⚡ Sem publicidade ou limite de downloads</li>
+                </ul>
+            </section>
+
+            <section class="faq">
+                <h3>Perguntas Frequentes</h3>
+                <div class="faq-container">
+                    <details>
+                        <summary>Como usar PROXY?</summary>
+                        <div class="faq-content">
+                            <p>É muito simples! Cole o link do vídeo, clique em "Baixar Áudio" e aguarde o processamento. O arquivo MP3 será baixado automaticamente.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Qual é o limite de tamanho?</summary>
+                        <div class="faq-content">
+                            <p>Atualmente suportamos arquivos de até 500MB. Vídeos maiores podem levar mais tempo para processar.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Meus dados são seguros?</summary>
+                        <div class="faq-content">
+                            <p>Sim! Não armazenamos seus dados ou links. Os arquivos são processados e deletados após o download.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Por que o download é lento?</summary>
+                        <div class="faq-content">
+                            <p>A velocidade depende da qualidade do vídeo e da sua conexão. Videos em alta qualidade levam mais tempo para processar.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 PROXY™ - Audio Downloader. Todos os direitos reservados.</p>
+            <p class="footer-brand">🤖 PROXY - Sua marca de qualidade 🤖</p>
+            <p>Use responsavelmente e respeite os direitos autorais.</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

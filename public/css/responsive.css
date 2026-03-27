@@ -1,0 +1,154 @@
+/* Tablets */
+@media (max-width: 768px) {
+    .logo-container {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .logo-image {
+        height: 60px;
+    }
+
+    .logo h1 {
+        font-size: 2em;
+    }
+
+    .hero h2 {
+        font-size: 1.6em;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    .btn-download {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .platform-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    header {
+        padding: 20px 0 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo h1 {
+        font-size: 1.5em;
+    }
+
+    .logo-image {
+        height: 50px;
+    }
+
+    .subtitle {
+        font-size: 0.95em;
+    }
+
+    .hero {
+        margin-bottom: 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.3em;
+    }
+
+    .hero p {
+        font-size: 0.95em;
+    }
+
+    .input-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .url-input {
+        padding: 12px 15px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-download {
+        padding: 12px 25px;
+        font-size: 0.95em;
+        min-height: 44px; /* Minimum touch target */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .platforms h3,
+    .features h3,
+    .faq h3 {
+        font-size: 1.3em;
+    }
+
+    .status-section,
+    .success-section {
+        padding: 25px;
+    }
+
+    .success-icon {
+        font-size: 3em;
+    }
+
+    .success-card h3 {
+        font-size: 1.4em;
+    }
+
+    details {
+        padding: 15px;
+    }
+
+    summary {
+        font-size: 0.95em;
+    }
+
+    footer {
+        padding: 20px 0;
+        font-size: 0.85em;
+    }
+}
+
+/* Small Phones */
+@media (max-width: 360px) {
+    .logo h1 {
+        font-size: 1.2em;
+    }
+
+    .hero h2 {
+        font-size: 1.1em;
+    }
+
+    .input-section {
+        padding: 15px;
+    }
+
+    .url-input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .btn-download {
+        padding: 10px 20px;
+        font-size: 0.85em;
+        gap: 5px;
+    }
+
+    .btn-icon {
+        display: none;
+    }
+}

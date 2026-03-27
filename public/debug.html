@@ -1,0 +1,35 @@
+<!-- Debug para verificar se as imagens estão carregando -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug - Teste de Imagem</title>
+</head>
+<body>
+    <h1>Teste de Carregamento de Imagem</h1>
+    
+    <h2>Testando diferentes caminhos:</h2>
+    
+    <h3>1. Caminho: ./images/mascote.png</h3>
+    <img src="./images/mascote.png" style="width: 200px; border: 1px solid red;" onerror="console.error('Erro em ./images/mascote.png')" onload="console.log('Sucesso em ./images/mascote.png')">
+    
+    <h3>2. Caminho: /images/mascote.png</h3>
+    <img src="/images/mascote.png" style="width: 200px; border: 1px solid blue;" onerror="console.error('Erro em /images/mascote.png')" onload="console.log('Sucesso em /images/mascote.png')">
+    
+    <h3>3. Caminho: ../images/mascote.png</h3>
+    <img src="../images/mascote.png" style="width: 200px; border: 1px solid green;" onerror="console.error('Erro em ../images/mascote.png')" onload="console.log('Sucesso em ../images/mascote.png')">
+    
+    <script>
+        console.log('=== DEBUG DE IMAGENS ===');
+        console.log('URL atual:', window.location.href);
+        
+        // Fazer requisição para verificar se o arquivo existe
+        fetch('/images/mascote.png')
+            .then(res => {
+                console.log('Status da requisição /images/mascote.png:', res.status);
+                if(res.ok) console.log('✅ ARQUIVO ENCONTRADO em /images/mascote.png');
+                else console.log('❌ Arquivo não encontrado em /images/mascote.png');
+            })
+            .catch(err => console.error('❌ Erro ao buscar /images/mascote.png:', err));
+    </script>
+</body>
+</html>

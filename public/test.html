@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste PROXY - Debug Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .url-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .btn-test {
+            background: #6d28d9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn-test:hover {
+            background: #5b21b6;
+        }
+        .log {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste PROXY - Debug Download</h1>
+
+    <div class="test-section">
+        <h2>🎵 Teste Manual de Download</h2>
+        <input type="url" id="testUrl" class="url-input" placeholder="Cole uma URL do YouTube, Instagram ou Facebook..." value="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+        <br>
+        <button class="btn-test" onclick="testDownload()">🚀 Testar Download</button>
+        <button class="btn-test" onclick="testValidation()">✅ Testar Validação</button>
+        <button class="btn-test" onclick="clearLog()">🧹 Limpar Log</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 URLs de Teste</h2>
+        <button class="btn-test" onclick="setUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ')">YouTube</button>
+        <button class="btn-test" onclick="setUrl('https://youtu.be/dQw4w9WgXcQ')">YouTube Short</button>
+        <button class="btn-test" onclick="setUrl('https://www.instagram.com/p/example/')">Instagram</button>
+        <button class="btn-test" onclick="setUrl('https://fb.watch/example/')">Facebook</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Log de Debug</h2>
+        <div id="debugLog" class="log"></div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('debugLog');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function clearLog() {
+            document.getElementById('debugLog').innerHTML = '';
+        }
+
+        function setUrl(url) {
+            document.getElementById('testUrl').value = url;
+            log(`URL definida: ${url}`);
+        }
+
+        async function testValidation() {
+            const url = document.getElementById('testUrl').value.trim();
+
+            log(`🔍 Testando validação da URL: ${url}`);
+
+            if (!url) {
+                log('❌ URL vazia', 'error');
+                return;
+            }
+
+            try {
+                new URL(url);
+                log('✅ URL sintaticamente válida', 'success');
+            } catch {
+                log('❌ URL sintaticamente inválida', 'error');
+                return;
+            }
+
+            const supportedPlatforms = ['youtube.com', 'youtu.be', 'instagram.com', 'fb.watch', 'facebook.com'];
+            const isSupported = supportedPlatforms.some(domain => url.includes(domain));
+
+            if (isSupported) {
+                log('✅ Plataforma suportada', 'success');
+            } else {
+                log('❌ Plataforma não suportada', 'error');
+            }
+        }
+
+        async function testDownload() {
+            const url = document.getElementById('testUrl').value.trim();
+
+            log(`🚀 Iniciando teste de download para: ${url}`);
+
+            try {
+                log('📡 Fazendo requisição POST para /api/download...');
+
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url })
+                });
+
+                log(`📡 Resposta recebida: ${response.status} ${response.statusText}`);
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    log(`❌ Erro da API: ${error.error}`, 'error');
+                    return;
+                }
+
+                log('✅ Download iniciado, baixando arquivo...');
+
+                const blob = await response.blob();
+                log(`✅ Arquivo baixado! Tamanho: ${(blob.size / 1024 / 1024).toFixed(2)} MB`, 'success');
+
+                // Criar link de download
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = 'teste_proxy.mp3';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(downloadUrl);
+
+                log('🎵 Download concluído! Arquivo salvo.', 'success');
+
+            } catch (error) {
+                log(`❌ Erro no download: ${error.message}`, 'error');
+                console.error('Erro detalhado:', error);
+            }
+        }
+
+        // Log inicial
+        log('🧪 Página de teste PROXY carregada');
+        log('📍 Servidor deve estar rodando em http://localhost:3001');
+        log('💡 Use as URLs de teste ou cole sua própria URL');
+    </script>
+</body>
+</html>
