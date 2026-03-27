@@ -3,10 +3,9 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const { downloaderManager } = require('../utils/downloader');
+const { downloadFolder } = require('../utils/storage');
 
 console.log('🔧 [ROUTES] Carregando rotas do downloader...');
-
-const downloadFolder = process.env.DOWNLOAD_FOLDER || './downloads';
 
 // Middleware para log de todas as requisições da API
 router.use((req, res, next) => {

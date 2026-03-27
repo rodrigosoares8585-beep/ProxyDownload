@@ -2,9 +2,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
-
-const downloadFolder = process.env.DOWNLOAD_FOLDER || './downloads';
-const tempFolder = process.env.TEMP_FOLDER || './temp';
+const { downloadFolder, tempFolder } = require('./storage');
 
 class DownloaderManager {
     constructor() {
@@ -31,7 +29,7 @@ class DownloaderManager {
             const command = `yt-dlp -x --audio-format mp3 --audio-quality 192 -o "${path.join(tempFolder, '%(title)s_%(id)s')}" "${url}" 2>&1`;
             
             console.log(`Iniciando download de: ${url}`);
-            const output = execSync(command, { encoding: 'utf-8' });
+            const output = execSync(command, { encoding: 'utf-8', stdio: 'pipe' });
             console.log('Saída yt-dlp:', output);
 
             // Encontrar o arquivo baixado
@@ -49,8 +47,9 @@ class DownloaderManager {
             return outputPath;
 
         } catch (error) {
-            console.error('Erro ao fazer download:', error.message);
-            throw new Error('Falha ao processar o vídeo. Verifique a URL e tente novamente.');
+            const details = error?.stdout || error?.stderr || error?.message || 'Erro desconhecido';
+            console.error('Erro ao fazer download:', details);
+            throw new Error('Falha ao processar o video no servidor. Verifique os logs do Render para ver o detalhe do yt-dlp.');
         }
     }
 

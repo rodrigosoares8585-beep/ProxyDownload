@@ -5,15 +5,13 @@ const path = require('path');
 const fs = require('fs');
 const config = require('./config');
 const audioDownloader = require('./routes/downloader');
+const { downloadFolder, tempFolder } = require('./utils/storage');
 console.log('🔧 [SERVER] Módulo downloader carregado:', typeof audioDownloader);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Criar pastas necessárias
-const downloadFolder = process.env.DOWNLOAD_FOLDER || './downloads';
-const tempFolder = process.env.TEMP_FOLDER || './temp';
-
 if (!fs.existsSync(downloadFolder)) {
   fs.mkdirSync(downloadFolder, { recursive: true });
 }
