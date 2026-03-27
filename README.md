@@ -155,12 +155,12 @@ Health check do servidor
 
 ### Plataformas Recomendadas
 
-#### 1. **Railway** (Mais Fácil)
-1. Acesse: https://railway.app
-2. Conecte seu repositório Git
-3. Railway detecta automaticamente Node.js
+#### 1. **Railway** (Recomendado para este projeto)
+1. Acesse: https://railway.com/new/github
+2. Selecione o repositório `ProxyDownload`
+3. Railway usará o `Dockerfile` do projeto para instalar `ffmpeg` e `yt-dlp`
 4. Adicione variável: `NODE_ENV=production`
-5. Deploy automático com domínio gratuito
+5. Deploy automático com domínio gerado pela plataforma
 
 #### 2. **Render**
 1. Acesse: https://render.com
@@ -182,6 +182,10 @@ Health check do servidor
 - **yt-dlp** disponível no sistema
 - **Espaço em disco** para arquivos temporários
 - **Variável PORT** (definida automaticamente pelas plataformas)
+
+### Observação para Railway
+
+Este projeto depende dos binários `ffmpeg` e `yt-dlp`. Por isso, o deploy na Railway deve usar o `Dockerfile` incluído no repositório, em vez do fluxo padrão de Node.js sem dependências de sistema.
 
 ### Otimização para Produção
 
